@@ -24,7 +24,9 @@ def drawTriangle (eye, shape, image):
         edgeCoord = shape[edge]
         tipCoord = shape[tipPoint]
         change = int((tipCoord[0]-edgeCoord[0])/3)
+        (x, y, w, h) = cv2.boundingRect(np.array([shape[edge:tipPoint]]))
         print("change is ",change)
+        x=x-40
     else:
         start = 36
         end = 42
@@ -32,10 +34,20 @@ def drawTriangle (eye, shape, image):
         top = 37
         bottom = 41
         edge = 39
-        
-        color = (0,0,255)
-        change = -40
-    
+
+        edgeCoord = shape[edge]
+        tipCoord = shape[tipPoint]
+        change = int((tipCoord[0]-edgeCoord[0])/3)
+        #cv2.circle(image, (shape[tipPoint]), 1, (255,255,0), -1)
+        color = (0,255,0)
+        (x, y, w, h) = cv2.boundingRect(np.array([shape[tipPoint:edge]]))
+        x=x-100
+
+    w =250
+    h =100
+    y=y-20
+
+    cropped = image[shape[tipPoint][0]:shape[tipPoint][0] - h, shape[top][1]:shape[bottom][1] - w]
     #for (x, y) in shape[start:end]:
         #cv2.circle(image, (x, y), 1, color, -1)
     
